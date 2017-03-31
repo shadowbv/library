@@ -1,0 +1,48 @@
+body{
+    margin: 0;
+}
+
+.bs-cont {
+    background-color: green;
+    height: 100vh;
+}
+.bs-col{
+    height: 100vh;;
+}
+/*.bs-col:nth-child(odd){
+    background-color: bisque;
+}
+
+.bs-col:nth-child(even){
+    background-color: coral;
+}*/
+
+.sidebar-1{
+    background-color: bisque;
+}
+
+.main{
+    background-color: coral;
+}
+.sidebar-2{
+    background-color: burlywood;
+}
+@media  (max-width: 992px){
+    .sidebar-1, .main{
+        height: 80vh;
+    }
+    .sidebar-2 {
+        height: 20vh;
+    }
+}
+@media  (max-width: 768px){
+    .sidebar-1 {
+        height: 20vh;
+    }
+    .main {
+        height: 60vh;
+    }
+}
+.row{
+    height: 100%;
+}

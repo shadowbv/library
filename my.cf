@@ -1,0 +1,5 @@
+[client]
+database = library
+user = 'libadmin'
+password = 'librarypass'
+default-character-set = utf8
