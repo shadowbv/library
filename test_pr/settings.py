@@ -122,6 +122,7 @@ USE_TZ = False
 STATIC_URL = '/static/'
 #STATIC_ROOT = (os.path.join(BASE_DIR, 'static'))
 #STATICFILES_DIRS = (STATIC_ROOT,)
-STATICFILES_DIRS = (os.path.join(BASE_DIR, "static"), 'c:\\Qt\\project\\bootstrap3\\catalog\\test_pr\static\\',)
+STATICFILES_DIRS = (os.path.join(BASE_DIR, "static"),)
 
-#MEDIA_URL = '/media/'
+MEDIA_URL = '/media/'
+
