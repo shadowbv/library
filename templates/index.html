@@ -22,8 +22,15 @@
           </div>
           <div class="col-xs-6 text-center">
              {{ doc.author }} </br>
-
           </div>
+
+          <div class="col-xs-12 text-center">
+             {% for itm in item %}
+                 {{ itm.item_no|linebreaks }}
+                 {{ itm.reg_date|linebreaks }}
+             {% endfor %}
+          </div>
+
       </div>
   </div>
     <!-- jQuexsry (necessary for Bootstrap's JavaScript plugins) -->

@@ -7,6 +7,7 @@ urlpatterns = [
     # url(r'^$', 'test_pr.views.home', name='home'),
     # url(r'^blog/', include('blog.urls')),
 
+    url(r'^$', include('documents.urls')),
     url(r'^student/', include('students.urls')),
     url(r'^document/', include('documents.urls')),
     url(r'^admin/', include(admin.site.urls)),

@@ -3,7 +3,7 @@ from django.db import models
 
 
 class Doctype(models.Model):
-    code = models.SmallIntegerField()
+    code = models.SmallIntegerField(primary_key=True)
     name = models.CharField(max_length=250, blank=True, null=True)
     norder = models.SmallIntegerField()
     marccode = models.CharField(max_length=3, blank=True, null=True)
@@ -21,8 +21,7 @@ class Doctype(models.Model):
 
 
 class Document(models.Model):
-    doc_type = models.SmallIntegerField()
-    #doc_type = models.SmallIntegerField()
+    doc_type = models.ForeignKey(Doctype)
     name = models.CharField(max_length=250, blank=True, null=True)
     device_kod = models.SmallIntegerField(blank=True, null=True)
     type_kod = models.SmallIntegerField(blank=True, null=True)
@@ -81,8 +80,8 @@ class Document(models.Model):
 
 
 class DocItem(models.Model):
-    doc_id = models.ForeignKey('Document')
-    item_id = models.IntegerField()
+    doc = models.ForeignKey('Document')
+    item_id = models.IntegerField(primary_key=True)
     item_no = models.CharField(max_length=32, blank=True, null=True)
     reg_date = models.DateTimeField(blank=True, null=True)
     commentt = models.CharField(max_length=128, blank=True, null=True)
@@ -120,4 +119,4 @@ class DocItem(models.Model):
         verbose_name_plural = "Примірники"
 
     def __str__(self):
-        return self.item_id
+        return str(self.doc.name)

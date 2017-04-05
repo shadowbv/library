@@ -5,7 +5,7 @@ from documents.models import *
 
 class DocumentAdmin(admin.ModelAdmin):
     #list_display = [field.name for field in Document._meta.fields]
-    list_display = ["name", "author", "doc_id", "reg_date", "lang"]
+    list_display = ["name", "author", "reg_date", "lang"]
     search_fields = ["author", "doc_id"]
     #list_filter = ["author"]
     #exclude = ["ADDRESS"]
@@ -16,12 +16,12 @@ class DocumentAdmin(admin.ModelAdmin):
 admin.site.register(Document, DocumentAdmin)
 
 class DocItemAdmin(admin.ModelAdmin):
-    #list_display = [field.name for field in Document._meta.fields]
-    list_display = ["item_id", "doc_id", "reg_date"]
-    search_fields = ["doc_id"]
+    list_display = [field.name for field in DocItem._meta.fields]
+    #list_display = ["item_id", "item_no", "item_intno", "reg_date"]
+    #search_fields = ["doc.name"]
     #list_filter = ["author"]
-    #exclude = ["ITEM_INTNO", "ITEM_MAINNO", "ITEM_NO"]
-    fields = ["doc_id"]
+    exclude = ["doc"]
+    #fields = ["doc"]
 
     class Meta:
         model = DocItem

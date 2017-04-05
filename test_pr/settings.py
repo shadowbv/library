@@ -29,6 +29,7 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = (
+    'suit',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -88,7 +89,7 @@ DATABASES = {
        'NAME': 'lib',
        'USER': 'libadmin',
        'PASSWORD': 'librarypass',
-       'HOST': '172.16.5.190',  # Or an IP Address that your DB is hosted on
+       'HOST': '172.16.6.113',  # Or an IP Address that your DB is hosted on
        'PORT': '3306',
    }
     #'default': {
