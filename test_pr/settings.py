@@ -89,7 +89,7 @@ DATABASES = {
        'NAME': 'lib',
        'USER': 'libadmin',
        'PASSWORD': 'librarypass',
-       'HOST': '172.16.6.113',  # Or an IP Address that your DB is hosted on
+       'HOST': '192.168.1.8',  # Or an IP Address that your DB is hosted on
        'PORT': '3306',
    }
     #'default': {
@@ -125,4 +125,3 @@ STATIC_URL = '/static/'
 STATICFILES_DIRS = (os.path.join(BASE_DIR, "static"),)
 
 MEDIA_URL = '/media/'
-

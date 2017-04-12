@@ -1,0 +1,110 @@
+{% extends "base.html" %}
+
+{% block searchResults %}
+    <div class="container">
+
+      <div class="row">
+
+      <div class="well">
+
+              <div class="">
+                  {% if doc.author != None %}
+                    <h3> {{ doc.author }} </h3>
+                  {% endif %}
+              </div>
+              <div class="">
+                  {% if doc.name != None %}
+                    <h4> {{ doc.name }} </h4>
+                  {% endif %}
+              </div>
+                <div>
+                    {% if doc.publ_year %}
+                    <strong>Рiк видання:</strong> {{ doc.publ_year }}
+                    {% endif %}
+                    {% if doc.publ_place %}
+                    <strong>Мiсце видання:</strong> {{ doc.publ_place }}
+                    {% endif %}
+                    {% if doc.publisher %}
+                    <strong>Видавництво:</strong> {{ doc.publisher }} <br>
+                    {% endif %}
+                    {% if doc.author %}
+                    <strong>Автор:</strong> {{ doc.author }}
+                    {% endif %}
+                    {% if doc.author_mark %}
+                    <strong>Авторський знак:</strong> {{ doc.author_mark }}
+                    {% endif %}
+                    {% if doc.type_kod.name %}
+                    <strong>Вид автора:</strong> {{ doc.type_kod.name }} <br>
+                    {% endif %}
+                    {% if doc.lang %}
+                    <strong>Мова:</strong> {{ doc.lang }}
+                    {% endif %}
+                    {% if doc.sizem %}
+                    <strong>Обсяг:</strong> {{ doc.sizem }} <br>
+                    {% endif %}
+                    {% if doc.udk %}
+                    <strong>УДК:</strong> {{ doc.udk }}
+                    {% endif %}
+                    {% if doc.isbn %}
+                    <strong>ISBN:</strong> {{ doc.isbn }}
+                    {% endif %}
+
+                </div>
+                <br>
+                <br>
+              <!--<div class="col-xs-12 text-center">-->
+      {% if item %}
+                <div class="container">
+                    <div class="row">
+                    <div class="col-lg-offset-2 col-xs-8 col-lg-offset-2">
+                    <table class="table table-bordered table-hover TableColor">
+                        <thead>
+                        <tr>
+                            <th colspan="4" class="text-center">Примірники</th>
+                        </tr>
+                        <tr class="text-center">
+                              <th class="text-center">
+                                  Місце збереження
+                              </th>
+                              <th class="text-center">
+                                  Інвентарний номер
+                              </th>
+                               <th class="text-center">
+                                  Кількість
+                              </th>
+                               <th class="text-center">
+                                  Видано
+                              </th>
+                              </tr>
+                        </thead>
+                        <tbody>
+                          {% for itm in item %}
+                              <tr class="text-center">
+                              <td>
+                                  {{ itm.device_kod.name }}
+                              </td>
+                              <td>
+                                  {{ itm.item_no }}
+                              </td>
+                               <td>
+                                  {{ itm.qtyall}}
+                              </td>
+                               <td>
+                                  {{ itm.qtyact}}
+                              </td>
+                              </tr>
+
+                         {% endfor %}
+                        </tbody>
+                    </table>
+                     </div>
+                </div>
+              <!--</div>-->
+          </div>
+      {% endif %}
+
+      </div>
+      </div>
+  </div>
+
+{% endblock %}

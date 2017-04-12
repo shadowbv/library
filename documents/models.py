@@ -19,12 +19,48 @@ class Doctype(models.Model):
     def __str__(self):
         return self.name
 
+class StorageList(models.Model):
+    kod = models.SmallIntegerField(primary_key=True)
+    name = models.CharField(max_length=32, blank=True, null=True)
+    is_distribution = models.SmallIntegerField(blank=True, null=True)
+    stype = models.CharField(max_length=1, blank=True, null=True)
+    reader_qty = models.IntegerField(blank=True, null=True)
+    file_reader_qty = models.IntegerField(blank=True, null=True)
+    short_name = models.CharField(max_length=32, blank=True, null=True)
+
+    class Meta:
+        managed = False
+        db_table = 'STORAGE_LIST'
+        ordering = ['kod']
+        verbose_name = "Місце збереження"
+        verbose_name_plural = "Місця збереження"
+
+    def __str__(self):
+        return str(self.name)
+
+
+class AuthTypeMain(models.Model):
+    kod = models.IntegerField(primary_key=True)
+    code = models.CharField(max_length=1, blank=True, null=True)
+    stat = models.CharField(max_length=1, blank=True, null=True)
+    name = models.CharField(max_length=15, blank=True, null=True)
+
+    class Meta:
+        managed = False
+        db_table = 'AUTH_TYPE_MAIN'
+        ordering = ['kod']
+        verbose_name = "Вид автора"
+        verbose_name_plural = "Вид автора"
+
+    def __str__(self):
+        return str(self.name)
+
 
 class Document(models.Model):
     doc_type = models.ForeignKey(Doctype)
     name = models.CharField(max_length=250, blank=True, null=True)
-    device_kod = models.SmallIntegerField(blank=True, null=True)
-    type_kod = models.SmallIntegerField(blank=True, null=True)
+    models.SmallIntegerField(blank=True, null=True)
+    type_kod = models.ForeignKey(AuthTypeMain)
     publisher = models.CharField(max_length=100, blank=True, null=True)
     reg_date = models.DateTimeField(blank=True, null=True)
     publ_place = models.CharField(max_length=80, blank=True, null=True)
@@ -80,14 +116,14 @@ class Document(models.Model):
 
 
 class DocItem(models.Model):
-    doc = models.ForeignKey('Document')
+    doc = models.ForeignKey(Document)
     item_id = models.IntegerField(primary_key=True)
     item_no = models.CharField(max_length=32, blank=True, null=True)
     reg_date = models.DateTimeField(blank=True, null=True)
     commentt = models.CharField(max_length=128, blank=True, null=True)
     status = models.CharField(max_length=1, blank=True, null=True)
     delivered = models.SmallIntegerField(blank=True, null=True)
-    device_kod = models.SmallIntegerField(blank=True, null=True)
+    device_kod = models.ForeignKey('StorageList')
     party_kod = models.IntegerField(blank=True, null=True)
     party_no = models.CharField(max_length=15, blank=True, null=True)
     act_kod = models.IntegerField(blank=True, null=True)
@@ -120,3 +156,4 @@ class DocItem(models.Model):
 
     def __str__(self):
         return str(self.doc.name)
+

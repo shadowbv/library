@@ -1,17 +1,52 @@
 .search{
-    margin-top: 20px;
+    margin-top: 10px;
 }
+.content{
+    margin-top: 20px;
+    /*margin-bottom: 30px;*/
+}
+.libot{
+    margin-bottom: 0px;
+}
+/*.paginatorBottom{
+    margin: 0px;
+}*/
 
-h1{
+.rowSearch {
+    padding-right: 0px;
+    padding-left: 0px;
+}
+.headText{
     font-family: Roboto;
     font-style: italic;
-    color: white;
+    color: antiquewhite;
 
 }
 body{
-    background-image: url(/static/images/back.jpg);
-    background-repeat: repeat-y;
+    background-image: url(../images/back.jpg) ;
+    /*background-repeat: repeat-y;*/
+    background-size: 100% 100%;
+    background-attachment: fixed;
 }
-/*img {
-    background-color: whitesmoke;
-}*/
+.img {
+    /*background-color: blanchedalmond;*/
+    max-width: 10%;
+}
+html {
+  /*position: relative;*/
+  min-height: 100%;
+}
+
+.footer {
+  /*position: absolute;*/
+  /*bottom: 0;*/
+  /*width: 100%;*/
+  /* Set the fixed height of the footer here */
+  height: 60px;
+  background-color: #f5f5f5;
+  /*background-color: blanchedalmond;*/
+  padding-top: 20px;
+}
+.table.TableColor{
+    background-color: white;
+}

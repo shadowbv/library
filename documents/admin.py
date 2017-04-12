@@ -30,3 +30,31 @@ class DocItemAdmin(admin.ModelAdmin):
 admin.site.register(DocItem, DocItemAdmin)
 
 
+class StorageListAdmin(admin.ModelAdmin):
+    list_display = [field.name for field in StorageList._meta.fields]
+    #list_display = ["item_id", "item_no", "item_intno", "reg_date"]
+    #search_fields = ["doc.name"]
+    #list_filter = ["author"]
+    #exclude = ["doc"]
+    #fields = ["doc"]
+
+    class Meta:
+        model = StorageList
+
+admin.site.register(StorageList, StorageListAdmin)
+
+
+class AuthTypeMainAdmin(admin.ModelAdmin):
+    list_display = [field.name for field in AuthTypeMain._meta.fields]
+    #list_display = ["item_id", "item_no", "item_intno", "reg_date"]
+    #search_fields = ["doc.name"]
+    #list_filter = ["author"]
+    #exclude = ["doc"]
+    #fields = ["doc"]
+
+    class Meta:
+        model = AuthTypeMain
+
+admin.site.register(AuthTypeMain, AuthTypeMainAdmin)
+
+

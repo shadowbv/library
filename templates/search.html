@@ -1,62 +1,89 @@
-{% load static %}
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
-      <title>Електронний Каталог НБ НаУОА</title>
+{% extends "base.html" %}
 
-    <!-- Bootstrap -->
-    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css'%}">
-    <link rel="stylesheet" href="{% static 'css/font-awesome.css'%}">
-    <link rel="stylesheet" href="{% static 'css/style.css'%}">
-  </head>
-  <body>
+    {% block searchField %}
 
-    <div class="container">
-        <div class="row">
-            <div class="page-header">
-                <h1 class="text-center ">Електронний Каталог НБ НаУОА</h1>
+        <div class="container search">
+            <div class="row">
+                <div class="col-xs-offset-1  col-xs-10 col-xs-offset-1 rowSearch">
+                    <form class="form-horizontal" action="" method="post">
+                        <div class="input-group">
+                            <span class="input-group-addon"><i class="fa fa-search"></i></span>
+                            <input  id="search" class="form-control" placeholder="Автор, Назва документу..." name="name" value="{{ form.name }}" type="text">
+
+                            <span class="input-group-btn">
+                               <button type="submit" class="btn btn-default">Пошук</button>
+                            </span>
+                        </div>
+                        {% csrf_token %}
+                    </form>
+                </div>
             </div>
-        </div>
-    </div>
-  <div class="container search">
-        <div class="row">
-            <div class="col-xs-12 ">
-                <form class="form-horizontal" action="" method="post">
-                    <div class="input-group">
-                        <!--<span class="input-group-addon">Пошук</span>-->
-                        <input  class="form-control" placeholder="Автор, Назва документа..." name="name" value="{{ form.name }}" type="text">
-                        <span class="input-group-btn">
-                           <button type="submit" class="btn btn-default"><span class="fa fa-search"></span></button>
-                        </span>
-                    </div>
-                    {% csrf_token %}
-                </form>
-            </div>
-        </div>
-  </div>
-  <div class="container search img">
-      <div class="row">
-          <div class="col-lg-12 ">
-          {% if docs %}
-              <p class="text-primary"> Загальне число результатів: {{ docs.count }}</p>
-             <ul>
-              {% for doc in docs %}
-                <li>
-                 <a href="/document/{{doc.doc_id}}">{{ doc.author }} - {{ doc.name }}</a>
-                 </li>
-              {% endfor %}
-              </ul>
-          {% endif %}
-          </div>
       </div>
-  </div>
-    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-    <!-- Include all compiled plugins (below), or include individual files as needed -->
-    <script src={% static 'js/bootstrap.min.js'%}></script>
-  </body>
-</html>
+    {% endblock %}
+
+  {% block searchResults %}
+    {% if docs  %}
+    <div class="container content">
+      <div class="row">
+      <div class="">
+        <div class="well">
+          <div class="">
+              <p class="text-left"> Загальне число результатів: <span class="badge">{{ paginator.count }}</span></p>
+                <!--<p class="text-left">  Пошук: {{ search_word }}</p>-->
+             <!--<ol class="list-group">-->
+              {% for doc in docs %}
+                <!--<li class="list-group-item"> <i class="fa fa-book fa-lg">  </i>-->
+                 {% if doc.author == None %}
+                     <!--<a  class="list-group-item" href="/document/{{doc.doc_id}}"> <i class="fa fa-book fa-lg"></i> {{ doc.name }}</a>-->
+                     <a  class="list-group-item" href="{% url "document" id_doc=doc.doc_id %}"> <i class="fa fa-book fa-lg"></i> {{ doc.name }}</a>
+                {% else %}
+                     <a class="list-group-item" href="{% url "document" id_doc=doc.doc_id %}"><i class="fa fa-book fa-lg">  </i> {{ doc.author }} - {{ doc.name }} </a>
+                {% endif %}
+                 <!--</li>-->
+              {% endfor %}
+              <!--</ol>-->
+
+
+              <nav aria-label="Page navigation">
+                  <ul class="pager">
+                    {% if docs.has_previous %}
+                     <li class="previous">
+                         <a href="?page={{ docs.previous_page_number }}&q={{ search_word }}"><span aria-hidden="true">&larr;</span> Попередня</a>
+                     </li>
+                    {% else %}
+                     <li class="disabled previous">
+                         <a href=""><span aria-hidden="true">&larr;</span> Попередня</a>
+                     </li>
+                    {% endif %}
+                    <span class="current">
+                    сторінка {{ docs.number }} з {{ docs.paginator.num_pages }}
+                    </span>
+                     {% if docs.has_next %}
+                      <li class="next">
+                         <a href="?page={{ docs.next_page_number }}&q={{ search_word }}">Наступна <span aria-hidden="true">&rarr;</span></a>
+                      </li>
+                     {% else %}
+                      <li class="disabled next">
+                         <a href="" aria-label="Next">Наступна <span aria-hidden="true">&rarr;</span></a>
+                      </li>
+                     {% endif %}
+                  </ul>
+              </nav>
+          </div>
+        </div>
+      </div>
+      </div>
+    </div>
+     <!--<div class="navbar navbar-fixed-bottom">
+        <div class="navbar-inner">
+            <div class="container">
+                 <div class="row">
+                    <div class="col-xs-12 footer">
+                         <p class="text-muted"></p>
+                    </div>
+                  </div>
+            </div>
+         </div>
+    </div>-->
+    {% endif %}
+  {% endblock %}
