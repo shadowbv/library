@@ -25,16 +25,17 @@
                     <strong>Мiсце видання:</strong> {{ doc.publ_place }}
                     {% endif %}
                     {% if doc.publisher %}
-                    <strong>Видавництво:</strong> {{ doc.publisher }} <br>
+                    <strong>Видавництво:</strong> {{ doc.publisher }}
                     {% endif %}
+                    <br>
                     {% if doc.author %}
                     <strong>Автор:</strong> {{ doc.author }}
                     {% endif %}
                     {% if doc.author_mark %}
-                    <strong>Авторський знак:</strong> {{ doc.author_mark }}
+                    <strong>Авторський знак:</strong> {{ doc.author_mark }}  <br>
                     {% endif %}
                     {% if doc.type_kod.name %}
-                    <strong>Вид автора:</strong> {{ doc.type_kod.name }} <br>
+                    <strong>Вид автора:</strong> {{ doc.type_kod.name| lower }}
                     {% endif %}
                     {% if doc.lang %}
                     <strong>Мова:</strong> {{ doc.lang }}
