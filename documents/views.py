@@ -4,7 +4,6 @@ from django.shortcuts import render
 from .models import *
 from django.db.models import Q
 from django.core.paginator import Paginator, InvalidPage
-import operator
 import json
 
 
@@ -14,6 +13,12 @@ def document(request, id_doc):
     except ObjectDoesNotExist:
         pass
     item = DocItem.objects.filter(doc=id_doc).order_by("item_intno")
+    if doc.parent_id:
+        parent_doc = Document.objects.get(doc_id=doc.parent_id)
+
+    if doc.is_parent:
+        parent_docs = Document.objects.filter(parent_id=doc.doc_id).order_by("name", "publ_year")
+
     return render(request, "docinfo.html", locals())
 
 

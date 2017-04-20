@@ -49,6 +49,32 @@
                     {% if doc.isbn %}
                     <strong>ISBN:</strong> {{ doc.isbn }}
                     {% endif %}
+                    <br>
+                    {% if doc.annot1 %}
+                    <strong class="text-center"> Аннотацiя </strong> <p> {{  doc.annot1 }} </p>
+                    {% endif %}
+
+                    {% if parent_doc %}
+                        Є складовою частиною документа:
+                        <a  class=" " href="{% url "document" id_doc=parent_doc.doc_id %}"> {{ parent_doc.name }}</a>
+                        <br>
+                    {% endif %}
+
+                    {% if doc.is_parent %}
+                        <strong> Складові частини документа:</strong>
+                        <br>
+                        <br>
+                     {% for docs in parent_docs %}
+                       {% if docs.author == None %}
+                            <a  class="list-group-item" href="{% url "document" id_doc=docs.doc_id %}"> <i class="fa fa-book fa-lg"></i> {{ docs.name }}. {{ docs.publ_year }}. {{ docs.sizem }} </a>
+                        {% else %}
+                            <a class="list-group-item" href="{% url "document" id_doc=docs.doc_id %}"><i class="fa fa-book fa-lg">  </i> {{ docs.author }} {{ docs.name }}. {{ docs.sizem }} </a>
+                     {% endif %}
+
+                     {% endfor %}
+
+
+                    {% endif %}
 
                 </div>
                 <br>

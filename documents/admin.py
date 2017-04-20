@@ -57,4 +57,6 @@ class AuthTypeMainAdmin(admin.ModelAdmin):
 
 admin.site.register(AuthTypeMain, AuthTypeMainAdmin)
 
+admin.site.register(Doctype)
+
 
