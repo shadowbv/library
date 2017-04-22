@@ -51,7 +51,11 @@
                     {% endif %}
                     <br>
                     {% if doc.annot1 %}
-                    <strong class="text-center"> Аннотацiя </strong> <p> {{  doc.annot1 }} </p>
+                        <div class="text-center">
+                            <strong> Аннотацiя </strong>
+                        </div>
+                        <p> &nbsp &nbsp &nbsp {{  doc.annot1 }} </p>
+
                     {% endif %}
 
                     {% if parent_doc %}
